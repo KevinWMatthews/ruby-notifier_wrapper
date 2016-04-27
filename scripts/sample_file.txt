@@ -1,0 +1,4 @@
+This is a file for you to monitor.
+If you run the demo script it will print to the console if this file is changed.
+
+Enjoy!
