@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
+require 'rb-inotify'
+
 class NotifierWrapper
   attr_reader :notifier
-  def initialize(notifier: nil)
+  def initialize(notifier: INotify::Notifier.new)
     @notifier = notifier
   end
 
