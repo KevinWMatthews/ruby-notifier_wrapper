@@ -4,6 +4,12 @@ require 'minitest/autorun'
 require_relative '../src/blocks.rb'
 
 describe AnObject do
+  class TestExternalObject < ExternalObject
+    def method_that_yields(value)
+      yield(value)
+    end
+  end
+
   it 'can store a value' do
     object = AnObject.new(value: 42)
     object.value.must_equal 42
@@ -12,7 +18,7 @@ describe AnObject do
   it 'can process the value' do
     value = 42
     mock_behavior = MiniTest::Mock.new
-    object = AnObject.new(value: value, behavior: mock_behavior)
+    object = AnObject.new(value: value, behavior: mock_behavior, external_class: TestExternalObject.new)
 
     mock_behavior.expect(:process_value, :canned_response, [value])
 
