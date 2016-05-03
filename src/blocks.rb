@@ -17,3 +17,15 @@ class AnObject
     yield(value)
   end
 end
+
+class ValueNotChanged
+  def process_value(value)
+    value
+  end
+end
+
+class ValueDoubled
+  def process_value(value)
+    value * 2
+  end
+end

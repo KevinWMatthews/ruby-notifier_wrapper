@@ -21,3 +21,19 @@ describe AnObject do
     mock_behavior.verify
   end
 end
+
+describe ValueNotChanged do
+  it 'leaves the argument unchanged' do
+    value = 42
+    behavior = ValueNotChanged.new
+    behavior.process_value(value).must_equal value
+  end
+end
+
+describe ValueDoubled do
+  it 'doubles the argument' do
+    value = 42
+    behavior = ValueDoubled.new
+    behavior.process_value(value).must_equal value * 2
+  end
+end
