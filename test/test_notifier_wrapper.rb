@@ -18,11 +18,11 @@ describe NotifierWrapper do
   it 'can detect a change to a file' do
     filename = 'sample_file.txt'
     mock_behavior = MiniTest::Mock.new
-    wrapper = NotifierWrapper.new(notifier: TestNotifier.new, behavior: mock_behavior)
+    wrapper = NotifierWrapper.new(notifier: TestNotifier.new)
 
     mock_behavior.expect(:on_file_changed, :not_using_return_value_yet, [])
 
-    wrapper.set_action_on_file_changed(filename)
+    wrapper.set_action_on_file_changed(filename) { mock_behavior.on_file_changed }
 
     mock_behavior.verify
   end

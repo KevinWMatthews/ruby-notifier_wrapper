@@ -3,15 +3,14 @@
 require 'rb-inotify'
 
 class NotifierWrapper
-  attr_reader :notifier, :behavior
-  def initialize(notifier: INotify::Notifier.new, behavior: nil)
+  attr_reader :notifier
+  def initialize(notifier: INotify::Notifier.new)
     @notifier = notifier
-    @behavior = behavior
   end
 
   def set_action_on_file_changed(filename)
     notifier.watch(filename, :modify) do
-      behavior.on_file_changed
+      yield
     end
   end
 
