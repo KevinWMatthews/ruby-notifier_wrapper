@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require_relative 'external_object.rb'
+
 class AnObject
   attr_reader :value, :behavior, :external_class
   def initialize(value: nil, behavior: nil, external_class: ExternalObject.new)
@@ -24,11 +26,5 @@ end
 class ValueDoubled
   def process_value(value)
     value * 2
-  end
-end
-
-class ExternalObject
-  def method_that_yields(value)
-    yield(value)
   end
 end
