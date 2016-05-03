@@ -8,6 +8,12 @@ class AnObject
   end
 
   def process_value
-    behavior.process_value(value)
+    method_that_yields do |block_argument|
+      behavior.process_value(block_argument)
+    end
+  end
+
+  def method_that_yields
+    yield(value)
   end
 end
