@@ -1,20 +1,17 @@
 #!/usr/bin/env ruby
 
 class AnObject
-  attr_reader :value, :behavior
-  def initialize(value: nil, behavior: nil)
+  attr_reader :value, :behavior, :external_class
+  def initialize(value: nil, behavior: nil, external_class: ExternalObject.new)
     @value = value
     @behavior = behavior
+    @external_class = external_class
   end
 
   def process_value
-    method_that_yields do |block_argument|
+    external_class.method_that_yields(value) do |block_argument|
       behavior.process_value(block_argument)
     end
-  end
-
-  def method_that_yields
-    yield(value)
   end
 end
 
@@ -27,5 +24,11 @@ end
 class ValueDoubled
   def process_value(value)
     value * 2
+  end
+end
+
+class ExternalObject
+  def method_that_yields(value)
+    yield(value)
   end
 end
