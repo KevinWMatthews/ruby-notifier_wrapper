@@ -15,6 +15,11 @@ describe NotifierWrapper do
     wrapper.notifier.must_be_instance_of(INotify::Notifier)
   end
 
+  it 'uses DoNothing behavior by default' do
+    wrapper = NotifierWrapper.new
+    wrapper.behavior.must_be_instance_of DoNothing
+  end
+
   it 'can detect a change to a file' do
     filename = 'sample_file.txt'
     mock_behavior = MiniTest::Mock.new

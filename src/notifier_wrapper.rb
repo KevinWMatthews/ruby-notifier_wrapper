@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
 
 require 'rb-inotify'
+require_relative 'behavior.rb'
 
 class NotifierWrapper
   attr_reader :notifier, :behavior
-  def initialize(notifier: INotify::Notifier.new, behavior: nil)
+  def initialize(notifier: INotify::Notifier.new, behavior: DoNothing.new)
     @notifier = notifier
     @behavior = behavior
   end
