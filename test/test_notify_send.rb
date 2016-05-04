@@ -20,4 +20,18 @@ describe NotifySend do
 
     mock_shell.verify
   end
+
+  it 'sends a notify-send command with a summary and a body to the shell' do
+    skip
+    summary = "Summary"
+    body = "This is the body of the message"
+    mock_shell = MiniTest::Mock.new
+    notifier = NotifySend.new(shell: mock_shell)
+
+    mock_shell.expect(:execute, nil, ["notify-send \"#{summary}\" \"#{body}\""])
+
+    notifier.send_notification(summary, body: body)
+
+    mock_shell.verify
+  end
 end
