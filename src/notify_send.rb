@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
+require_relative 'shell.rb'
+
 class NotifySend
   attr_reader :shell
-  def initialize(shell: nil)
+  def initialize(shell: ShellWrapper.new)
     @shell = shell
   end
 
