@@ -1,1 +1,6 @@
 Create default notification for NotifySend?
+
+Do other desktopo notification systems accept a message summary and message body? If not, I will have to rethink the DesktopNotification interface.
+Perhaps there is an extra abstraction layer in there.
+For full flexibility, I should probably pass a NotifySend message into DesktopNotification. This way DesktopNotification doesn't need to know any details of how NotifySend creates its messages.
+The downside is that the end-user needs to know how to use NotifySend, but maybe that isn't so bad. They do want the message to be customized, right?
