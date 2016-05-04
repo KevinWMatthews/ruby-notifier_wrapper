@@ -14,10 +14,12 @@ class NotifySend
 
   private
     def create_notification(summary, body)
-      "#{NOTIFY_SEND} #{format_text(summary)}"
+      shell_command = "#{NOTIFY_SEND} #{format_text(summary)} #{format_text(body)}"
+      shell_command.strip
     end
 
     def format_text(text)
+      return "" if text.nil?
       "\"#{text}\""
     end
 

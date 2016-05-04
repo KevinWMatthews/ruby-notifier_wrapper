@@ -22,7 +22,6 @@ describe NotifySend do
   end
 
   it 'sends a notify-send command with a summary and a body to the shell' do
-    skip
     summary = "Summary"
     body = "This is the body of the message"
     mock_shell = MiniTest::Mock.new
