@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../src/notifier_wrapper.rb'
+require_relative '../src/behavior.rb'
 
-notifier = NotifierWrapper.new
-notifier.do_something_when_file_changes('sample_file.txt')
+filename = 'sample_file.txt'
+message = "#{filename} has been modified!"
+notifier = NotifierWrapper.new( behavior: DesktopNotification.new(message: message) )
+
+notifier.set_action_on_file_changed(filename)
+notifier.block_until_file_changes

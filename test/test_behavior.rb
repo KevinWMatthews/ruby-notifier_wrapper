@@ -11,6 +11,11 @@ describe DoNothing do
 end
 
 describe DesktopNotification do
+  it 'uses NotifySend by default' do
+    behavior = DesktopNotification.new
+    behavior.desktop_notifier.must_be_instance_of NotifySend
+  end
+
   it 'sends a desktop notification' do
     message = "You have been notified!"
     mock_notifier = MiniTest::Mock.new
