@@ -8,7 +8,7 @@ class NotifySend
     @shell = shell
   end
 
-  def send_notification(notification)
-    shell.execute("notify-send #{notification}")
+  def send_notification(summary)
+    shell.execute("notify-send \"#{summary}\"")
   end
 end
