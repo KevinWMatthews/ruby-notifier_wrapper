@@ -2,7 +2,7 @@
 
 require 'open4'
 
-class ShellWrapper
+class Shell
   def execute(command)
     Open4.popen4(command)
   end

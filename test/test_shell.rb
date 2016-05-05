@@ -4,10 +4,10 @@ require 'minitest/autorun'
 require 'spy'
 require_relative '../src/shell.rb'
 
-describe ShellWrapper do
+describe Shell do
   it 'can send a command using Open4' do
     command = 'sample shell command'
-    shell = ShellWrapper.new
+    shell = Shell.new
     spy = Spy.on(Open4, :popen4)
 
     shell.execute(command)

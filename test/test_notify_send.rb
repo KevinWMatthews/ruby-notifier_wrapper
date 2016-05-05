@@ -4,9 +4,9 @@ require 'minitest/autorun'
 require_relative '../src/notify_send.rb'
 
 describe NotifySend do
-  it 'uses ShellWrapper by default' do
+  it 'uses Shell by default' do
     notifier = NotifySend.new
-    notifier.shell.must_be_instance_of ShellWrapper
+    notifier.shell.must_be_instance_of Shell
   end
 
   it 'sends a notify-send command with a summary to the shell' do
