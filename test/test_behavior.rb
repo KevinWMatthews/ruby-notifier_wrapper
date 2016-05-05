@@ -12,17 +12,15 @@ end
 
 describe DesktopNotification do
   it 'uses NotifySend by default' do
-    behavior = DesktopNotification.new('dummy message')
-    behavior.desktop_notifier.must_be_instance_of NotifySend
+    behavior = DesktopNotification.new()
+    behavior.notification.must_be_instance_of NotifySend
   end
 
   it 'sends a desktop notification' do
-    message_summary = "Alert! Alert!"
-    message_body = "You have been notified!"
     mock_notifier = MiniTest::Mock.new
-    behavior = DesktopNotification.new(message_summary, body: message_body, desktop_notifier: mock_notifier)
+    behavior = DesktopNotification.new(notification: mock_notifier)
 
-    mock_notifier.expect(:send_notification, nil, [message_summary, body: message_body])
+    mock_notifier.expect(:send_notification, nil, [])
 
     behavior.on_file_changed
 

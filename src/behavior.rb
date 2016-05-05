@@ -9,14 +9,12 @@ class DoNothing
 end
 
 class DesktopNotification
-  attr_reader :desktop_notifier, :summary, :body
-  def initialize(summary, body: nil, desktop_notifier: NotifySend.new)
-    @desktop_notifier = desktop_notifier
-    @summary = summary
-    @body = body
+  attr_reader :notification
+  def initialize(notification: NotifySend.new)
+    @notification = notification
   end
 
   def on_file_changed
-    desktop_notifier.send_notification(summary, body: body)
+    notification.send_notification
   end
 end
