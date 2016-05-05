@@ -1,14 +1,12 @@
 #!/usr/bin/env ruby
 
 require_relative '../src/file_monitor.rb'
-require_relative '../src/behavior.rb'
+require_relative '../src/notify_send.rb'
 
 filename = 'sample_file.txt'
 message_summary = "File changed detected!"
 message_body = "#{filename} has been modified."
 notification = NotifySend.new(summary: message_summary, body: message_body)
-behavior = DesktopNotification.new(notification: notification)
-notifier = FileMonitor.new(behavior: behavior)
+notifier = FileMonitor.new
 
-notifier.set_action_on_file_changed(filename)
-notifier.block_until_file_changes
+notifier.block_until_file_changes(filename) { notification.send_notification }

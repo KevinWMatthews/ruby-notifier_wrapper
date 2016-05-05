@@ -1,22 +1,17 @@
 #!/usr/bin/env ruby
 
 require 'rb-inotify'
-require_relative 'behavior.rb'
 
 class FileMonitor
-  attr_reader :monitor, :behavior
-  def initialize(monitor: INotify::Notifier.new, behavior: DoNothing.new)
+  attr_reader :monitor
+  def initialize(monitor: INotify::Notifier.new)
     @monitor = monitor
-    @behavior = behavior
   end
 
-  def set_action_on_file_changed(filename)
+  def block_until_file_changes(filename)
     monitor.watch(filename, :modify) do
-      behavior.on_file_changed
+      yield if block_given?
     end
-  end
-
-  def block_until_file_changes
     monitor.process
   end
 end
