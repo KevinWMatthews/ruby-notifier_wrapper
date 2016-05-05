@@ -14,4 +14,11 @@ class FileMonitor
     end
     monitor.process
   end
+
+  def block_until_string_is_added_to_file(filename, string)
+    monitor.watch(filename, :modify) do
+      yield if block_given?
+    end
+    monitor.run
+  end
 end
