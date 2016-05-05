@@ -3,17 +3,18 @@
 require_relative 'shell.rb'
 
 class NotifySend
-  attr_reader :shell
-  def initialize(shell: ShellWrapper.new)
+    attr_reader :shell, :command
+  def initialize(summary: "", body: nil, shell: ShellWrapper.new)
+    @command = create_shell_command(summary, body)
     @shell = shell
   end
 
-  def send_notification(summary, body: nil)
-    shell.execute( create_notification(summary, body) )
+  def send_notification
+    shell.execute( command )
   end
 
   private
-    def create_notification(summary, body)
+    def create_shell_command(summary, body)
       shell_command = "#{NOTIFY_SEND} #{format_text(summary)} #{format_text(body)}"
       shell_command.strip
     end

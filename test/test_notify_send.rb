@@ -12,11 +12,11 @@ describe NotifySend do
   it 'sends a notify-send command with a summary to the shell' do
     summary = "Hello world!"
     mock_shell = MiniTest::Mock.new
-    notifier = NotifySend.new(shell: mock_shell)
+    notifier = NotifySend.new(summary: summary, shell: mock_shell)
 
     mock_shell.expect(:execute, nil, ["notify-send \"#{summary}\""])
 
-    notifier.send_notification(summary)
+    notifier.send_notification
 
     mock_shell.verify
   end
@@ -25,11 +25,11 @@ describe NotifySend do
     summary = "Summary"
     body = "This is the body of the message"
     mock_shell = MiniTest::Mock.new
-    notifier = NotifySend.new(shell: mock_shell)
+    notifier = NotifySend.new(summary: summary, body: body, shell: mock_shell)
 
     mock_shell.expect(:execute, nil, ["notify-send \"#{summary}\" \"#{body}\""])
 
-    notifier.send_notification(summary, body: body)
+    notifier.send_notification
 
     mock_shell.verify
   end
